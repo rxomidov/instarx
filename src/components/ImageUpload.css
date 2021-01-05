@@ -3,6 +3,9 @@
     flex-direction: column;
     width: 60%;
     margin: 10px auto;
+    background: #fff;
+    border-top: 1px solid lightgray;
+    padding: 10px;
 }
 .img-upload progress{
     width: 100%;

@@ -8,6 +8,7 @@ import Post from "./components/Post";
 import {db, auth} from "./firebase";
 import {makeStyles, Modal, Button, Input} from "@material-ui/core";
 import ImageUpload from "./components/ImageUpload";
+import InstagramEmbed from "react-instagram-embed";
 
 function getModalStyle() {
     const top = 50;
@@ -67,7 +68,7 @@ function App() {
     }, [user, username]);
 
     useEffect(() => {
-        db.collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot => {
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             setPosts(snapshot.docs.map(doc => ({
                 id: doc.id,
                 post: doc.data()
@@ -148,26 +149,40 @@ function App() {
             <div className="app-header">
                 <img src={logo} alt="logo"
                      className="app-headerImg"/>
+                {user ? (
+                    <Button onClick={() => auth.signOut()}>Log Out</Button>
+                ) : (
+                    <div className="app-loginContainer">
+                        <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                    </div>
+                )}
             </div>
-            {user ? (
-                <Button onClick={() => auth.signOut()}>Log Out</Button>
-            ) : (
-                <div className="app-loginContainer">
-                    <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-                    <Button onClick={() => setOpen(true)}>Sign Up</Button>
-                </div>
-            )}
-            <h1>Insta gram :rocket</h1>
             {/*    header*/}
-            {
-                posts.map(({id, post}) => (
-                    <Post key={id} username={post.username} caption={post.caption}
-                          imageUrl={post.imageUrl}/>
-                ))
-            }
+            <div className="app-posts">
+                {
+                    posts.map(({id, post}) => (
+                        <Post key={id} postId={id} user={user} username={post.username} caption={post.caption}
+                              imageUrl={post.imageUrl}/>
+                    ))
+                }
+            </div>
             {user?.displayName
                 ? (<ImageUpload username={user.displayName}/>)
                 : (<h3>Sorry, Yu need to Login</h3>)}
+            <InstagramEmbed
+                url="https://www.instagram.com/p/CGyucmxA95n/"
+                maxWidth={320}
+
+                hideCaption={false}
+                containerTagName='div'
+                protocol=''
+                injectScript
+                onLoading={() => {}}
+                onSuccess={() => {}}
+                onAfterRender={() => {}}
+                onFailure={() => {}}
+            />
         </div>
     );
 }
