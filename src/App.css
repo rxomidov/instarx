@@ -24,4 +24,17 @@
 }
 .app-posts{
   padding: 20px;
+  padding-bottom: 200px!important;
+}
+.sorry{
+  text-align: center;
+  padding-bottom: 4rem;
+  color: darkred;
+}
+
+
+@media screen and (max-width: 768px) {
+  .app-posts{
+    //padding-bottom: 50px;
+  }
 }

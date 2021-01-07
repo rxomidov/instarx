@@ -24,7 +24,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
-        width: 400,
+        width: 300,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid black',
         boxShadow: theme.shadows[5],
@@ -169,7 +169,7 @@ function App() {
             </div>
             {user?.displayName
                 ? (<ImageUpload username={user.displayName}/>)
-                : (<h3>Sorry, Yu need to Login</h3>)}
+                : (<h3 className="sorry">Sorry, You need to Login To Upload Images!</h3>)}
             <InstagramEmbed
                 url="https://www.instagram.com/p/CGyucmxA95n/"
                 maxWidth={320}

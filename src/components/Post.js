@@ -26,7 +26,7 @@ const Post = ({username, caption, imageUrl, postId, user}) => {
         }
     }, [postId]);
 
-    const postComment = (event) => {hhhhhhhgjnvhynffghnbvhh
+    const postComment = (event) => {
         event.preventDefault();
         db.collection("posts")
             .doc(postId).collection("comments")
